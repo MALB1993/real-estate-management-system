@@ -1,58 +1,233 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Real Estate Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A real estate management platform built with **Laravel**, **MySQL**, and **REST API**.
 
-## About Laravel
+## 📌 Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The **Real Estate Management System** is a web-based platform designed to provide a structured foundation for managing real estate-related data and operations.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The project is being developed with Laravel and follows Laravel's conventions to keep the codebase clean, maintainable, and scalable.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Key Goals
 
-## Learning Laravel
+* Manage real estate properties in a structured way
+* Provide a reliable backend architecture
+* Build RESTful APIs for application integration
+* Maintain a clean and scalable Laravel codebase
+* Provide a foundation for future real estate management features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Technology Stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Technology | Purpose                           |
+| ---------- | --------------------------------- |
+| PHP        | Backend programming language      |
+| Laravel    | Web application framework         |
+| MySQL      | Relational database               |
+| REST API   | Application programming interface |
+| Blade      | Server-side templating            |
+| Vite       | Frontend asset management         |
+| Git        | Version control                   |
+| GitHub     | Source control and collaboration  |
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 🏗️ Project Structure
 
-## Agentic Development
+The project follows the standard Laravel application structure:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+```text
+app/
+├── Http/
+├── Models/
+└── Providers/
 
-```bash
-composer require laravel/boost --dev
+bootstrap/
+config/
+database/
+├── factories/
+├── migrations/
+└── seeders/
 
-php artisan boost:install
+public/
+resources/
+├── css/
+├── js/
+└── views/
+
+routes/
+├── console.php
+└── web.php
+
+storage/
+tests/
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+This structure helps separate application logic, database operations, routes, frontend resources, and automated tests.
 
-## Contributing
+## ⚙️ Requirements
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Before running the project, make sure the following are installed:
 
-## Code of Conduct
+* PHP
+* Composer
+* MySQL
+* Node.js & NPM
+* Git
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📦 Installation
 
-## Security Vulnerabilities
+Clone the repository:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+git clone https://github.com/MALB1993/real-estate-management-system.git
+```
 
-## License
+Navigate to the project directory:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+cd real-estate-management-system
+```
+
+Install PHP dependencies:
+
+```bash
+composer install
+```
+
+Install frontend dependencies:
+
+```bash
+npm install
+```
+
+Create the environment file:
+
+```bash
+cp .env.example .env
+```
+
+Generate the Laravel application key:
+
+```bash
+php artisan key:generate
+```
+
+Configure your database credentials in the `.env` file.
+
+Run the database migrations:
+
+```bash
+php artisan migrate
+```
+
+Build frontend assets:
+
+```bash
+npm run build
+```
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+The application will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+## 🔌 API
+
+The project is designed with REST API support in mind, allowing the backend to communicate with external clients and future frontend applications.
+
+API endpoints are organized within Laravel's routing system and can be extended as new features are implemented.
+
+## 🧪 Testing
+
+Automated tests can be executed using:
+
+```bash
+php artisan test
+```
+
+Testing is used to help maintain application reliability as new features are introduced.
+
+## 🌿 Git Workflow
+
+Development follows a feature-based Git workflow.
+
+```text
+main
+└── develop
+    ├── feature/*
+    ├── fix/*
+    └── docs/*
+```
+
+For example:
+
+```bash
+git switch develop
+
+git pull origin develop
+
+git switch -c feature/example-feature
+```
+
+After implementing a change:
+
+```bash
+git add .
+
+git commit -m "feat: add example feature"
+
+git push -u origin feature/example-feature
+```
+
+Changes can then be reviewed through a Pull Request before being merged into the development branch.
+
+## 📝 Commit Convention
+
+The project uses descriptive commit messages based on the type of change:
+
+```text
+feat: add new functionality
+fix: resolve application issue
+docs: update documentation
+refactor: improve code structure
+test: add or update tests
+chore: update project configuration
+```
+
+## 🔐 Environment & Security
+
+Environment-specific configuration should be stored in the `.env` file.
+
+Sensitive information such as:
+
+* Database credentials
+* Application keys
+* API credentials
+* Third-party service credentials
+
+must not be committed to the repository.
+
+The `.env.example` file should be used as the template for configuring a local development environment.
+
+## 🤝 Contributing
+
+Contributions and improvements are welcome.
+
+For a new feature or bug fix:
+
+1. Create an Issue describing the task.
+2. Create a dedicated branch from `develop`.
+3. Implement the required changes.
+4. Commit the changes using a descriptive commit message.
+5. Push the branch to GitHub.
+6. Open a Pull Request.
+7. Review and merge the changes after approval.
+
+## 📄 License
+
+This project is open-sourced under the MIT License.

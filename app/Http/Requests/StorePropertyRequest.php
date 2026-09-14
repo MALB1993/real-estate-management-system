@@ -31,8 +31,8 @@ class StorePropertyRequest extends FormRequest
             'area'              => ['required', 'numeric', 'min:0'],
             'bedrooms'          => ['required', 'integer', 'min:0'],
             'bathrooms'         => ['required', 'integer', 'min:0'],
-            'address'           => ['required', 'string', 'string'],
-            'city'              => ['required', 'string', 'string', 'max:255'],
+            'address'           => ['required', 'string'],
+            'city'              => ['required', 'string', 'max:255'],
             'state'             => ['required', 'string', 'in:available,sold,reserved'],
         ];
     }

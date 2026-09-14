@@ -144,7 +144,26 @@ API endpoints are organized within Laravel's routing system and can be extended 
 
 ## 🧪 Testing
 
-Automated tests can be executed using:
+The project uses Laravel's built-in testing infrastructure to help maintain application reliability and prevent regressions as new features are introduced.
+
+Run the complete test suite with:
+
+```bash
+php artisan test
+```
+
+For more detailed test output:
+
+```bash
+php artisan test -v
+```
+
+Tests are organized according to Laravel's testing conventions and can be extended as new features and API endpoints are implemented.
+
+Before submitting a Pull Request, contributors are encouraged to run the test suite and make sure all tests pass successfully.
+
+
+
 
 ```bash
 php artisan test

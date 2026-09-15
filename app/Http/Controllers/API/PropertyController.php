@@ -17,7 +17,7 @@ class PropertyController extends Controller
     public function index()
     {
         // retrieving all properties from the database
-        $properties = Property::with('user:id, name, email')->latest()->paginate(10);
+        $properties = Property::with('user')->get();
         // returning a JSON response with the list of properties
         return response()->json([
             'data' => $properties

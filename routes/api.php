@@ -1,22 +1,30 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PropertyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Api\PropertyController;
 
-// API route for retrieving the authenticated user
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
+// Public Authentication Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+// Public Property Routes (Anyone can view)
+Route::get('/properties', [PropertyController::class, 'index']);
+Route::get('/properties/{property}', [PropertyController::class, 'show']);
+
+// Protected Routes (Requires Bearer Token)
 Route::middleware('auth:sanctum')->group(function () {
+    // Auth Routes
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
-});
 
-// API routes for the Property resource
-Route::apiResource('properties', PropertyController::class);
+    // Protected Property Routes (Only Authenticated Users)
+    Route::post('/properties', [PropertyController::class, 'store']);
+    Route::put('/properties/{property}', [PropertyController::class, 'update']);
+    Route::patch('/properties/{property}', [PropertyController::class, 'update']);
+    Route::delete('/properties/{property}', [PropertyController::class, 'destroy']);
+});

@@ -20,10 +20,16 @@ class Property extends Model
         'address',
         'city',
         'state',
+        'user_id'
     ];
 
     public function propertyType()
     {
         return $this->belongsTo(PropertyType::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

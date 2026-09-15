@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PropertyController;
+use App\Http\Controllers\API\PropertyImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/properties/{property}', [PropertyController::class, 'update']);
     Route::patch('/properties/{property}', [PropertyController::class, 'update']);
     Route::delete('/properties/{property}', [PropertyController::class, 'destroy']);
+
+    Route::post('/properties/{property}/images', [PropertyImageController::class, 'store']);
+    Route::delete('/properties/{property}/images/{image}', [PropertyImageController::class, 'destroy']);
 });

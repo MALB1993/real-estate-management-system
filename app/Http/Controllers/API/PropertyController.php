@@ -7,6 +7,7 @@ use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PropertyController extends Controller
 {
@@ -16,7 +17,7 @@ class PropertyController extends Controller
     public function index()
     {
         // retrieving all properties from the database
-        $properties = Property::all();
+        $properties = Property::with('user:id, name, email')->latest()->paginate(10);
         // returning a JSON response with the list of properties
         return response()->json([
             'data' => $properties
@@ -28,7 +29,7 @@ class PropertyController extends Controller
      */
     public function store(StorePropertyRequest $request)
     {
-        $property = Property::create($request->validated());
+        $property = $request->user()->properties()->create($request->validated());
 
         return response()->json([
             'success' => true,
@@ -40,21 +41,11 @@ class PropertyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Property $property)
     {
-
-        $property = Property::find($id);
-
-        if (!$property) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Property not found.',
-            ], 404);
-        }
-
         return response()->json([
             'success' => true,
-            'data' => $property,
+            'data' => $property->load('user:id, name, email'),
         ]);
     }
 
@@ -63,28 +54,30 @@ class PropertyController extends Controller
      */
     public function update(UpdatePropertyRequest $request, Property $property)
     {
+        
+        Gate::authorize('update', $property);
 
-        $validated = $request->validated();
-
-        $property->update($validated);
+        $property->update($request->validated());
 
         return response()->json([
-            'success'   => true,
-            'message'   => 'Property updated successfully.',
-            'data'      =>  $property->fresh()
-        ]);
+            'success' => true,
+            'message' => 'Property updated successfully.',
+            'data' => $property->fresh(),
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Property $property)
+    public function destroy(Request $request, Property $property)
     {
+        Gate::authorize('delete', $property);  
+
         $property->delete();
 
         return response()->json([
             'success' => true,
             'message' => 'Property deleted successfully.',
-        ]);
+        ], 200);
     }
 }

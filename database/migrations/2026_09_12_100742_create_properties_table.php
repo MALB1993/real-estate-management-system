@@ -18,9 +18,11 @@ return new class extends Migration
                 ->constrained('property_types')
                 ->onDelete('cascade');
 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
             $table->string('title');
             $table->text('description');
-            
+
             $table->decimal('price', 15, 2);
             $table->decimal('area', 10, 2);
 

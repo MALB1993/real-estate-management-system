@@ -61,4 +61,9 @@ class Property extends Model
                 $query->where('city', $city);
             });
     }
+
+    public function favoriteProperties()
+    {
+        return $this->belongsToMany(User::class, 'property_user')->withTimestamps();
+    }
 }

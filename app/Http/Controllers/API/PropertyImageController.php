@@ -8,6 +8,7 @@ use App\Models\Property;
 use App\Models\PropertyImage;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\API\PropertyImageResource;
 
 class PropertyImageController extends Controller
 {
@@ -28,7 +29,7 @@ class PropertyImageController extends Controller
         return response()->json([
             'success'   =>  true,
             'message'   =>  'Images uploaded successfully.',
-            'data'    => $uploadedImages,
+            'data' => PropertyImageResource::collection($uploadedImages),
         ], 201);
     }
 

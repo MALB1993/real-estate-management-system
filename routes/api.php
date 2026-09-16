@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\Api\PropertyController;
 use App\Http\Controllers\API\PropertyImageController;
+use App\Http\Controllers\API\VisitRequestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/favorites', [FavoriteController::class, 'index']);
     Route::post('/properties/{property}/favorite', [FavoriteController::class, 'toggle']);
+
+    Route::get('/visit-requests', [VisitRequestController::class, 'index']);
+    Route::post('/visit-requests', [VisitRequestController::class, 'store']);
+    Route::patch('/visit-requests/{visitRequest}/status', [VisitRequestController::class, 'updateStatus']);
+    Route::post('/visit-requests/{visitRequest}/cancel', [VisitRequestController::class, 'cancel']);
 });

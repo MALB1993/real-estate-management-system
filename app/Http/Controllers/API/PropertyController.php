@@ -14,12 +14,16 @@ class PropertyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // retrieving all properties from the database
-        $properties = Property::with('user')->get();
-        // returning a JSON response with the list of properties
+        $properties = Property::query()
+            ->with(['user', 'images'])
+            ->filter($request->only(['search', 'price_min', 'price_max', 'property_type_id', 'city']))
+            ->latest()
+            ->paginate(10);
+
         return response()->json([
+            'success' => true,
             'data' => $properties
         ]);
     }
@@ -54,7 +58,7 @@ class PropertyController extends Controller
      */
     public function update(UpdatePropertyRequest $request, Property $property)
     {
-        
+
         Gate::authorize('update', $property);
 
         $property->update($request->validated());
@@ -71,7 +75,7 @@ class PropertyController extends Controller
      */
     public function destroy(Request $request, Property $property)
     {
-        Gate::authorize('delete', $property);  
+        Gate::authorize('delete', $property);
 
         $property->delete();
 

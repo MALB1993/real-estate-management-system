@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Property;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\PropertyType;
+use App\Models\User;
 
 /**
  * @extends Factory<Property>
@@ -21,6 +22,7 @@ class PropertyFactory extends Factory
         // returning an array of fake data for the Property model
         return [
             'property_type_id'  => PropertyType::factory(),
+            'user_id'           => User::factory(),
             'title'             => fake()->sentence(3),
             'description'       => fake()->paragraph(),
             'price'             => fake()->randomFloat(2, 50000, 1000000),

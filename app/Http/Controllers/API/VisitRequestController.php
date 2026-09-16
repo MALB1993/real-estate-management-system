@@ -8,6 +8,7 @@ use App\Http\Requests\API\StoreVisitRequest;
 use App\Http\Requests\API\UpdateVisitRequestStatusRequest;
 use App\Models\VisitRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class VisitRequestController extends Controller
 {
@@ -48,6 +49,8 @@ class VisitRequestController extends Controller
 
     public function updateStatus(UpdateVisitRequestStatusRequest $request, VisitRequest $visitRequest)
     {
+        Gate::authorize('updateStatus', $visitRequest);
+
         $visitRequest->update([
             'status' => $request->status,
             'agent_note' => $request->agent_note,
@@ -63,9 +66,7 @@ class VisitRequestController extends Controller
 
     public function cancel(Request $request, VisitRequest $visitRequest)
     {
-        if ($visitRequest->user_id !== $request->user()->id) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
+        Gate::authorize('cancel', $visitRequest);
 
         if ($visitRequest->status !== VisitRequestStatus::PENDING) {
             return response()->json([

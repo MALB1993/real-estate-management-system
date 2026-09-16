@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\Api\PropertyController;
 use App\Http\Controllers\API\PropertyImageController;
 use Illuminate\Http\Request;
@@ -31,4 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/properties/{property}/images', [PropertyImageController::class, 'store']);
     Route::delete('/properties/{property}/images/{image}', [PropertyImageController::class, 'destroy']);
+
+    Route::get('/favorites', [FavoriteController::class, 'index']);
+    Route::post('/properties/{property}/favorite', [FavoriteController::class, 'toggle']);
 });

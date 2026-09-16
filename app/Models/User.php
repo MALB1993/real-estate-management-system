@@ -35,4 +35,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Property::class);
     }
+
+    public function favoriteProperties()
+    {
+        return $this->belongsToMany(Property::class, 'property_user')->withTimestamps();
+    }
 }
